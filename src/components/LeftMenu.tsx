@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
 import { BsGithub } from "react-icons/bs";
 import { CiMobile1 } from "react-icons/ci";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -16,6 +16,7 @@ const LeftMenu = () => {
   const isDarkModeOn = useSelector(
     (state: RootState) => state.darkMode.isDarkModeOn
   );
+
   return (
     <div
       className={`"shadow-md p-4 rounded-md h-full w-full border  ${
@@ -34,7 +35,7 @@ const LeftMenu = () => {
             <h1 className="text-xl font-bold ">NIRANJAN RAJU</h1>
             <h3
               className={`font-semibold bg-gray-200 px-4 rounded-sm ${
-                isDarkModeOn ? "bg-white text-black" : "bg-white"
+                isDarkModeOn ? "bg-white text-black" : "bg-gray-200"
               } transition-all duration-500`}>
               Full Stack Developer
             </h3>
@@ -85,8 +86,16 @@ const LeftMenu = () => {
           </div>
 
           <div className="m-auto ">
-            <Link download="download" href="">
-              <button className="flex justify-center items-center gap-2 border w-max px-4 rounded-md border-blue-500 py-2 hover:bg-blue-500 hover:text-white transition-all duration-300">
+            <Link
+              download="download"
+              href="/asserts/resume.pdf"
+              target="_blank">
+              <button
+                className={`flex justify-center items-center gap-2 border w-max px-4 rounded-md  py-2 transition-all duration-300 ${
+                  isDarkModeOn
+                    ? "bg-transparent text-white   hover:bg-white hover:text-black "
+                    : "bg-transparent text-black border-blue-500 hover:text-white hover:bg-blue-500 "
+                }`}>
                 {" "}
                 <RiDownloadLine /> Download CV
               </button>

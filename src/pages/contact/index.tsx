@@ -1,5 +1,5 @@
 import { RootState } from "@/redux/types/DarkModeType";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 interface FormDataInterface {
@@ -96,7 +96,11 @@ const Contact: React.FC = () => {
             <div>
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 rounded-md shadow-md font-medium uppercase py-2">
+                className={`px-4 rounded-md shadow-md font-medium uppercase py-2 ${
+                  isDarkModeOn
+                    ? "bg-black text-white"
+                    : "bg-blue-500 text-white"
+                }`}>
                 Submit
               </button>
             </div>

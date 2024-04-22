@@ -50,8 +50,8 @@ const About = () => {
         <div className="flex flex-col gap-4 mb-5">
           <h1 className="text-xl font-bold">About</h1>
           <p className="text-sm">
-            Hello! I&apos;m Niranjan Raju, a passionate Front-End developer.From my
-            early age I was so much passionate on web. I develop web
+            Hello! I&apos;m Niranjan Raju, a passionate Front-End developer.From
+            my early age I was so much passionate on web. I develop web
             applications, I also have experience working with Reactjs and Next
             js. Able to do any web and programming related task by handling
             difficulties smoothly in any given time. Have a reasonable skill on
@@ -67,8 +67,13 @@ const About = () => {
           <h1 className="font-medium">What I Do!</h1>
           <div className="grid grid-cols-2 my-5 gap-4">
             {AboutCardData.map((item, index) => (
-              <div key={index}
-                className={`flex gap-4 p-4 rounded-md shadow-md hover:bg-${item.bg}-100 border transition-colors duration-300`}>
+              <div
+                key={index}
+                className={`flex gap-4 p-4 rounded-md shadow-md border transition-colors duration-300 ${
+                  isDarkModeOn
+                    ? "bg-white text-black"
+                    : "bg-slate-800 text-white"
+                }`}>
                 <div className="basis-[10%] text-green-500 text-3xl">
                   <FaCode />
                 </div>

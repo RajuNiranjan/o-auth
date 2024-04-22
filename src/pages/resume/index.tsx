@@ -89,7 +89,9 @@ const Resume = () => {
         `}
       </style>
       <div>
-        <h1 className="text-xl font-bold">Resume</h1>
+        <h1 className="text-xl font-bold sticky top-0 scroll-m-0 backdrop-blur-md p-5 rounded-full">
+          Resume
+        </h1>
 
         <div className="my-5 grid grid-cols-2 gap-4">
           <div>
@@ -104,7 +106,11 @@ const Resume = () => {
               {educationDetails.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-${item.bgColor}-100 border rounded-md p-4 shadow-md h-32`}>
+                  className={`${
+                    isDarkModeOn
+                      ? "bg-white text-black"
+                      : "bg-white text-black "
+                  } border rounded-md p-4 shadow-md h-32`}>
                   <small>{item.years}</small>
                   <h1 className="font-medium">{item.collegeName}</h1>
                   <p>{item.department}</p>
@@ -125,7 +131,11 @@ const Resume = () => {
               {experienceDetails.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-${item.bgColor}-100 rounded-md p-4 shadow-md border h-32`}>
+                  className={`${
+                    isDarkModeOn
+                      ? "bg-white text-black"
+                      : "bg-white text-black "
+                  } border rounded-md p-4 shadow-md h-32`}>
                   <small>{item.years}</small>
                   <h1 className="font-medium">{item.collegeName}</h1>
                   <p className="text-lg font-medium text-gray-500">
@@ -144,7 +154,9 @@ const Resume = () => {
               <h1
                 key={index}
                 className={`bg-gray-300 w-max  rounded-sm px-2 ${
-                  isDarkModeOn ? "bg-black text-black" : "bg-white"
+                  isDarkModeOn
+                    ? "bg-black text-black"
+                    : "bg-gray-100 text-black"
                 } transition-all duration-500 `}>
                 {item}
               </h1>

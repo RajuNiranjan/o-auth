@@ -102,13 +102,15 @@ const Projects = () => {
         `}
       </style>{" "}
       <div>
-        <h1 className="font-bold text-xl">Projects</h1>
+        <h1 className="font-bold text-xl sticky top-0 scroll-m-0 backdrop-blur-md p-5 rounded-full">
+          Projects
+        </h1>
         <div className="grid grid-cols-2 gap-4 my-4">
           {projectsData.map((item, index) => (
             <div
               key={index}
-              className={` bg-gray-100 p-2 rounded-md shadow-md border h-full ${
-                isDarkModeOn ? "bg-black text-black" : "bg-white"
+              className={`  p-2 rounded-md shadow-md border h-full ${
+                isDarkModeOn ? "bg-white text-black" : "bg-gray-100"
               } transition-all duration-500 `}>
               <div>
                 <Image
@@ -125,12 +127,22 @@ const Projects = () => {
                 <div>
                   <div className="flex justify-end items-center gap-4">
                     <Link href={item.gitUrl}>
-                      <div className="w-10 h-10 rounded-full bg-black bg-opacity-30 hover:bg-opacity-100 transition-all duration-300 text-white flex justify-center items-center">
+                      <div
+                        className={`w-10 h-10 rounded-full  transition-all duration-300  flex justify-center items-center ${
+                          isDarkModeOn
+                            ? "bg-black text-white  bg-opacity-30 hover:bg-opacity-100"
+                            : "bg-black text-white bg-opacity-30 hover:bg-opacity-100"
+                        }`}>
                         <FaCode />
                       </div>
                     </Link>
                     <Link href={item.previewUrl}>
-                      <div className="w-10 h-10 rounded-full bg-black bg-opacity-30 hover:bg-opacity-100 transition-all duration-300 text-white flex justify-center items-center">
+                      <div
+                        className={`w-10 h-10 rounded-full transition-all duration-300  flex justify-center items-center ${
+                          isDarkModeOn
+                            ? "bg-black text-white  bg-opacity-30 hover:bg-opacity-100"
+                            : "bg-black text-white bg-opacity-30 hover:bg-opacity-100"
+                        }`}>
                         <LuEye />
                       </div>
                     </Link>
