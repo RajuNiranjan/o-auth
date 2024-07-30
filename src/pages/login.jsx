@@ -1,7 +1,15 @@
 import axios from "axios";
+import { authFailure, authStart, authSuccess } from "../redux/Actions/user";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.user);
+
+  const navigate = useNavigate();
+
   const [logInFormData, setLogInFormData] = useState({
     email: "",
     password: "",
@@ -18,13 +26,20 @@ const LogIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("api/auth/login", logInFormData);
-    const data = res.data;
-    console.log("register form data", data);
-    setLogInFormData({
-      email: "",
-      password: "",
-    });
+    dispatch(authStart());
+    try {
+      const res = await axios.post("api/auth/login", logInFormData);
+      const data = res.data;
+      dispatch(authSuccess(data));
+      setLogInFormData({
+        email: "",
+        password: "",
+      });
+      navigate("/listing");
+    } catch (error) {
+      console.log(error);
+      dispatch(authFailure());
+    }
   };
 
   return (
