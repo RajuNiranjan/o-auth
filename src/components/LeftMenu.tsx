@@ -16,12 +16,14 @@ const LeftMenu = () => {
   const isDarkModeOn = useSelector(
     (state: RootState) => state.darkMode.isDarkModeOn
   );
+  console.log("hlksajdf");
 
   return (
     <div
       className={`"shadow-md p-4 rounded-md h-full w-full border  ${
         isDarkModeOn ? "bg-black text-white" : "bg-white"
-      } transition-all duration-500`}>
+      } transition-all duration-500`}
+    >
       <div className="flex flex-col justify-between h-full">
         <div className="relative flex flex-col justify-between h-full  gap-4">
           <div className="flex flex-col gap-2 items-center justify-center mt-20">
@@ -36,14 +38,16 @@ const LeftMenu = () => {
             <h3
               className={`font-semibold bg-gray-200 px-4 rounded-sm ${
                 isDarkModeOn ? "bg-white text-black" : "bg-gray-200"
-              } transition-all duration-500`}>
+              } transition-all duration-500`}
+            >
               Full Stack Developer
             </h3>
           </div>
           <div className="flex gap-4 text-2xl my-4">
             <Link
               href="https://www.linkedin.com/in/raju-niranjan/"
-              target="blank">
+              target="blank"
+            >
               <LiaLinkedinIn className="bg-blue-500 p-1 hover:p-0 transition-all duration-300 rounded-sm text-white" />
             </Link>
             <Link href="https://github.com/RajuNiranjan" target="blank">
@@ -89,13 +93,15 @@ const LeftMenu = () => {
             <Link
               download="download"
               href="/asserts/resume.pdf"
-              target="_blank">
+              target="_blank"
+            >
               <button
                 className={`flex justify-center items-center gap-2 border w-max px-4 rounded-md  py-2 transition-all duration-300 ${
                   isDarkModeOn
                     ? "bg-transparent text-white   hover:bg-white hover:text-black "
                     : "bg-transparent text-black border-blue-500 hover:text-white hover:bg-blue-500 "
-                }`}>
+                }`}
+              >
                 {" "}
                 <RiDownloadLine /> Download CV
               </button>
