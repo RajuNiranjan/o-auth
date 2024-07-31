@@ -1,10 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authStart } from "../redux/Actions/user";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.user);
   const user = currentUser?.user;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [profileFormData, setProfileFormData] = useState({
     userName: user.userName,
     email: user.email,
@@ -38,6 +42,19 @@ const Profile = () => {
       email: user.email,
       password: "",
     });
+  };
+
+  const LogOutAccount = async () => {
+    try {
+      const res = await axios.get("/api/auth/logout");
+      const data = res.data;
+      dispatch(authStart());
+      localStorage.clear();
+      console.log(data);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -88,6 +105,9 @@ const Profile = () => {
           className="w-full p-4 rounded-lg bg-green-400 text-white font-bold"
         >
           Update Profile
+        </button>
+        <button type="button" onClick={LogOutAccount}>
+          LogOut
         </button>
       </form>
     </div>

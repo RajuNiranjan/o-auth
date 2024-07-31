@@ -9,10 +9,12 @@ import Register from "./pages/register";
 import Listings from "./pages/listings";
 import PrivateRoute from "./components/privateRoute";
 import Profile from "./pages/profile";
+import NavBar from "./components/navBar";
 
 function App() {
   return (
     <Router>
+      <NavBar />
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
