@@ -47,7 +47,7 @@ const LogIn = () => {
       <form
         onSubmit={handleSubmit}
         className="border p-4 rounded-lg shadow-lg flex flex-col gap-4 w-[450px] bg-white">
-        <h1 className="text-center font-bold text-2xl">Register</h1>
+        <h1 className="text-center font-bold text-2xl">Log In</h1>
         <div className="flex flex-col">
           <label htmlFor="email">Email</label>
           <input
