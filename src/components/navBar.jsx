@@ -8,7 +8,7 @@ const NavBar = () => {
   const user = currentUser?.user;
 
   return (
-    <nav className="flex justify-between items-center p-4 h-20 shadow-lg">
+    <nav className="flex justify-between items-center p-4 h-20 shadow-lg bg-white sticky z-50 top-0">
       <div>
         <h1>Authentication</h1>
       </div>

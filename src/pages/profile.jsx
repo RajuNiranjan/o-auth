@@ -74,8 +74,7 @@ const Profile = () => {
     <div className="flex justify-center items-center h-screen">
       <form
         onSubmit={onSubmitProfileForm}
-        className="flex flex-col gap-4 border shadow-lg p-4"
-      >
+        className="flex flex-col gap-4 border shadow-lg p-4 w-[450px] bg-white">
         <h1 className="text-center text-xl font-bold">Update Profile</h1>
         <div className="flex flex-col">
           <label htmlFor="userName">User Name</label>
@@ -115,8 +114,7 @@ const Profile = () => {
 
         <button
           type="submit"
-          className="w-full p-4 rounded-lg bg-green-400 text-white font-bold"
-        >
+          className="w-full p-4 rounded-lg bg-green-400 text-white font-bold">
           Update Profile
         </button>
         <div className="flex justify-between items-center">
