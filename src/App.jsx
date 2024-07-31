@@ -8,6 +8,7 @@ import LogIn from "./pages/login";
 import Register from "./pages/register";
 import Listings from "./pages/listings";
 import PrivateRoute from "./components/privateRoute";
+import Profile from "./pages/profile";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route element={<PrivateRoute />}>
           <Route path="/listing" element={<Listings />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

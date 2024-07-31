@@ -35,7 +35,7 @@ const LogIn = () => {
         email: "",
         password: "",
       });
-      navigate("/listing");
+      navigate("/profile");
     } catch (error) {
       console.log(error);
       dispatch(authFailure());
