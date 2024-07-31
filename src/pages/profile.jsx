@@ -57,6 +57,19 @@ const Profile = () => {
     }
   };
 
+  const DeleteAccount = async () => {
+    try {
+      const res = await axios.delete(`/api/user/delteaccount/${user.id}`);
+      const data = res.data;
+      console.log(data);
+      navigate("/login");
+      dispatch(authStart());
+      localStorage.clear();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center h-screen">
       <form
@@ -106,9 +119,14 @@ const Profile = () => {
         >
           Update Profile
         </button>
-        <button type="button" onClick={LogOutAccount}>
-          LogOut
-        </button>
+        <div className="flex justify-between items-center">
+          <button type="button" onClick={DeleteAccount}>
+            Delete Account
+          </button>
+          <button type="button" onClick={LogOutAccount}>
+            LogOut
+          </button>
+        </div>
       </form>
     </div>
   );
