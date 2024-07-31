@@ -1,8 +1,11 @@
 import axios from "axios";
-import React from "react";
+import React, { useId } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Listings = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const userId = currentUser?.user.id;
   const [listingsFormData, setListingFromData] = useState({
     title: "",
     description: "",
@@ -10,6 +13,7 @@ const Listings = () => {
     offer_price: "",
     regular_price: "",
     images: "",
+    user: userId,
   });
 
   const OnChangeText = (e) => {
@@ -20,20 +24,28 @@ const Listings = () => {
     }));
   };
 
-  const onSubmitListingForm = (e) => {
+  const onSubmitListingForm = async (e) => {
     e.preventDefault();
-    console.log(listingsFormData);
-    const res = axios.post("/api/listings/createlisting", listingsFormData);
-    const data = res.data;
-    console.log(data);
-    setListingFromData({
-      title: "",
-      description: "",
-      location: "",
-      offer_price: "",
-      regular_price: "",
-      images: "",
-    });
+    try {
+      const res = await axios.post(
+        "/api/listings/createlisting",
+        listingsFormData
+      );
+      const data = res.data;
+      console.log("data", data);
+      console.log("listing", listingsFormData);
+      setListingFromData({
+        title: "",
+        description: "",
+        location: "",
+        offer_price: "",
+        regular_price: "",
+        images: "",
+        user: userId,
+      });
+    } catch (error) {
+      console.error("Error submitting listing form:", error);
+    }
   };
 
   return (
