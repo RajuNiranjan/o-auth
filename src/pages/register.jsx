@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -10,6 +10,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -34,6 +36,7 @@ const Register = () => {
       navigate("/login");
     } catch (error) {
       console.log(error);
+      setError(error.response.data.message);
     }
   };
 
@@ -46,7 +49,9 @@ const Register = () => {
         <h1 className="text-center font-bold text-2xl">Register</h1>
 
         <div className="flex flex-col">
-          <label htmlFor="userName">User Name</label>
+          <label htmlFor="userName">
+            User Name <small className="text-red-500">*</small>
+          </label>
           <input
             type="text"
             id="userName"
@@ -57,7 +62,9 @@ const Register = () => {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">
+            Email <small className="text-red-500">*</small>
+          </label>
           <input
             type="email"
             id="email"
@@ -68,7 +75,9 @@ const Register = () => {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">
+            Password <small className="text-red-500">*</small>
+          </label>
           <input
             type="password"
             id="password"
@@ -77,13 +86,20 @@ const Register = () => {
             className="focus:outline-none border p-3 rounded-lg"
           />
         </div>
-
+        {error && <small className="text-red-500 text-center">{error}</small>}
         <button
           type="submit"
           className="bg-blue-500 w-full p-3 rounded-lg text-white font-bold  text-xl"
         >
           Submit
         </button>
+
+        <small className="text-center">
+          already have an account ?{" "}
+          <Link className="text-blue-500" to="/login">
+            Login
+          </Link>
+        </small>
       </form>
     </div>
   );
