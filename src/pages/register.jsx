@@ -44,8 +44,7 @@ const Register = () => {
     <div className="h-screen flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="border p-4 rounded-lg shadow-lg flex flex-col gap-4"
-      >
+        className="border p-4 rounded-lg shadow-lg flex flex-col gap-4 w-[450px] bg-white">
         <h1 className="text-center font-bold text-2xl">Register</h1>
 
         <div className="flex flex-col">
@@ -89,8 +88,7 @@ const Register = () => {
         {error && <small className="text-red-500 text-center">{error}</small>}
         <button
           type="submit"
-          className="bg-blue-500 w-full p-3 rounded-lg text-white font-bold  text-xl"
-        >
+          className="bg-blue-500 w-full p-3 rounded-lg text-white font-bold  text-xl">
           Submit
         </button>
 

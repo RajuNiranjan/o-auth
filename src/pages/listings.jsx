@@ -52,8 +52,7 @@ const Listings = () => {
     <div className="h-screen flex justify-center items-center ">
       <form
         onSubmit={onSubmitListingForm}
-        className="flex flex-col gap-4 p-4 rounded-lg shadow-lg"
-      >
+        className="flex flex-col gap-4 p-4 rounded-lg shadow-lg w-[450px] bg-white">
         <div className="flex flex-col">
           <label htmlFor="title">Title</label>
           <input

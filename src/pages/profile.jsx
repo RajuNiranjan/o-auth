@@ -1,11 +1,21 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authStart } from "../redux/Actions/user";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { app } from "../fire_base";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const fileUploader = useRef(null);
+  const [fileUploadError, setFileUploadError] = useState(false);
+
   const user = currentUser?.user;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,7 +23,10 @@ const Profile = () => {
     userName: user.userName,
     email: user.email,
     password: "",
+    avatar: user.avatar,
   });
+
+  const [filePerc, setFilePerc] = useState(0);
 
   const OnChangeText = (e) => {
     const { name, value } = e.target;
@@ -21,6 +34,37 @@ const Profile = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const onImageChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setFilePerc(Math.round(progress));
+      },
+      (error) => {
+        console.log(error);
+        setFileUploadError(true);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setProfileFormData((prev) => ({
+            ...prev,
+            avatar: downloadURL,
+          }));
+        });
+      }
+    );
   };
 
   const onSubmitProfileForm = async (e) => {
@@ -59,6 +103,7 @@ const Profile = () => {
 
   const DeleteAccount = async () => {
     try {
+      console.log(profileFormData);
       const res = await axios.delete(`/api/user/delteaccount/${user.id}`);
       const data = res.data;
       console.log(data);
@@ -74,9 +119,39 @@ const Profile = () => {
     <div className="flex justify-center items-center h-screen">
       <form
         onSubmit={onSubmitProfileForm}
-        className="flex flex-col gap-4 border shadow-lg p-4"
-      >
+        className="flex flex-col gap-4 border shadow-lg p-4 w-[450px] bg-white">
         <h1 className="text-center text-xl font-bold">Update Profile</h1>
+
+        <div className="flex flex-col">
+          <input
+            type="file"
+            hidden
+            ref={fileUploader}
+            onChange={onImageChange}
+          />
+          <img
+            src={profileFormData.avatar}
+            onClick={() => fileUploader.current.click()}
+            alt="Profile"
+            className="w-24 h-24 rounded-full items-center self-center cursor-pointer object-cover border "
+          />
+          <p className="text-sm self-center">
+            {fileUploadError ? (
+              <span className="text-red-700">
+                Error Image upload (image must be less than 2 mb)
+              </span>
+            ) : filePerc > 0 && filePerc < 100 ? (
+              <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
+            ) : filePerc === 100 ? (
+              <span className="text-green-700">
+                Image successfully uploaded!
+              </span>
+            ) : (
+              ""
+            )}
+          </p>
+        </div>
+
         <div className="flex flex-col">
           <label htmlFor="userName">User Name</label>
           <input
@@ -115,8 +190,7 @@ const Profile = () => {
 
         <button
           type="submit"
-          className="w-full p-4 rounded-lg bg-green-400 text-white font-bold"
-        >
+          className="w-full p-4 rounded-lg bg-green-400 text-white font-bold">
           Update Profile
         </button>
         <div className="flex justify-between items-center">

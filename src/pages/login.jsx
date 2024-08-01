@@ -47,9 +47,8 @@ const LogIn = () => {
     <div className="h-screen flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="border p-4 rounded-lg shadow-lg flex flex-col gap-4"
-      >
-        <h1 className="text-center font-bold text-2xl">Register</h1>
+        className="border p-4 rounded-lg shadow-lg flex flex-col gap-4 w-[450px] bg-white">
+        <h1 className="text-center font-bold text-2xl">Log In</h1>
         <div className="flex flex-col">
           <label htmlFor="email">
             Email <small className="text-red-500">*</small>
@@ -78,8 +77,7 @@ const LogIn = () => {
         {error && <small className="text-red-500 text-center">{error}</small>}
         <button
           type="submit"
-          className="bg-blue-500 w-full p-3 rounded-lg text-white font-bold  text-xl"
-        >
+          className="bg-blue-500 w-full p-3 rounded-lg text-white font-bold  text-xl">
           Submit
         </button>
 
