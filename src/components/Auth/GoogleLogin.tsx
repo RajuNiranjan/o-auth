@@ -1,5 +1,6 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase";
+import googleIcon from "../../assets/google.svg";
 
 export const GoogleLogin = () => {
   const handleGoogleClick = async () => {
@@ -17,8 +18,9 @@ export const GoogleLogin = () => {
     <button
       type="button"
       onClick={handleGoogleClick}
-      className="border flex items-center gap-2 bg-gray-900 text-white w-max p-4  rounded-full ">
-      <p className="text-xl">Continue with Google</p>
+      className="border flex items-center gap-2 bg-white shadow-xl text-black w-max p-4  rounded-full  ">
+      <img src={googleIcon} alt="" width={25} height={25} />
+      <p className="text-lg">Continue with Google</p>
     </button>
   );
 };
